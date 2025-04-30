@@ -35,9 +35,9 @@ jobs:
 
       - name: sync citron mirror
         run: |
-          git clone --bare https://x-access-token:${{ secrets.GH_PAT }}@github.com:pflyly/torzu-mirror.git torzu.git
+          git clone --bare https://x-access-token:${{ secrets.GH_PAT }}@github.com/pflyly/torzu-mirror.git torzu.git
           cd torzu.git
           git remote add upstream https://notabug.org/litucks/torzu.git
           git fetch upstream
           git update-ref refs/heads/main refs/remotes/upstream/master
-          git push --mirror https://x-access-token:${{ secrets.GH_PAT }}@github.com:pflyly/torzu-mirror.git
+          git push --mirror https://x-access-token:${{ secrets.GH_PAT }}@github.com/pflyly/torzu-mirror.git
