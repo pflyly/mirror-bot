@@ -17,7 +17,7 @@ jobs:
 
       - name: sync citron mirror
         run: |
-          git clone --bare https://github.com/pflyly/citron-mirror.git mirror.git
+          git clone --bare https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/pflyly/citron-mirror.git mirror.git
           cd mirror.git
           git remote add upstream https://git.citron-emu.org/citron/emu.git
           git fetch upstream
