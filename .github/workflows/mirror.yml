@@ -53,8 +53,18 @@ jobs:
 
       - name: sync eden mirror
         run: |
-          git clone --bare https://x-access-token:${{ secrets.GH_PAT }}@github.com/pflyly/eden-mirror.git eden.git
-          cd eden.git
-          git remote add upstream https://git.eden-emu.dev/eden-emu/eden.git
-          git fetch upstream --prune
-          git push origin --mirror
+            git clone --mirror https://x-access-token:${{ secrets.GH_PAT }}@github.com/pflyly/eden-mirror.git
+            cd eden-mirror.git
+            git remote add upstream https://git.eden-emu.dev/eden-emu/eden.git
+            git fetch upstream --prune
+            for ref in $(git for-each-ref --format='%(refname)' refs/heads/); do
+                git update-ref -d "$ref"
+            done
+
+            for ref in $(git for-each-ref --format='%(refname:strip=3)' refs/remotes/upstream/); do
+                if [[ "$ref" != "HEAD" ]]; then
+                git update-ref "refs/heads/$ref" "refs/remotes/upstream/$ref"
+                fi
+            done
+            
+            git push --mirror
