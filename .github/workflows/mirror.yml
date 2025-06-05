@@ -67,5 +67,5 @@ jobs:
                 git update-ref "refs/heads/$ref" "refs/remotes/upstream/$ref"
                 fi
             done
-            git push origin :refs/heads/submodules || true
+
             git push --mirror
