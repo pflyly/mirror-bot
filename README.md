@@ -1,1 +1,1 @@
-# mirror bot for my citron and torzu mirror
+# mirror bot for my citron, torzu and eden mirror
