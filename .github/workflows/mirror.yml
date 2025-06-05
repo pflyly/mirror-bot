@@ -57,8 +57,9 @@ jobs:
             cd eden-mirror.git
             git remote add upstream https://git.eden-emu.dev/eden-emu/eden.git
             git fetch upstream --prune
-            for ref in $(git for-each-ref --format='%(refname)' refs/heads/); do
-                git update-ref -d "$ref"
+            
+            for ref in $(git for-each-ref --format='%(refname:strip=2)' refs/heads/); do
+                git update-ref -d "refs/heads/$ref"
             done
 
             for ref in $(git for-each-ref --format='%(refname:strip=3)' refs/remotes/upstream/); do
